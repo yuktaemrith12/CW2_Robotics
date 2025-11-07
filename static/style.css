@@ -1,0 +1,439 @@
+/* ================================
+   SortiFy — Global Theme Tokens
+   ================================ */
+:root{
+  /* Brand */
+  --ink:#1c2230;
+  --bg:#e9f1ef;                 /* light minty background */
+  --panel:#ffffff;
+  --sidebar:#3e5a54;            /* deep green/teal from mockup */
+  --sidebar-700:#324a45;
+  --accent:#317e6e;            
+  --primary:#317e6e;
+  --primary-600:#2a6c5f;
+
+  /* Neutrals */
+  --muted:#7b8a8a;
+  --line:#e5eceb;
+  --shadow:0 12px 28px rgba(18, 29, 27, .10);
+
+  /* Radii */
+  --r-lg:24px;
+  --r-md:16px;
+  --r-sm:12px;
+
+  /* Layout */
+  --sidebar-w: 260px;
+  --content-max: 980px;
+}
+
+/* Base reset-ish */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;
+  color:var(--ink); background:var(--bg);
+  /* soft abstract backdrop */
+  background-image:
+    radial-gradient(1200px 600px at -10% 10%, rgba(227,186,57,.18), transparent 60%),
+    radial-gradient(1200px 600px at 110% 60%, rgba(62,90,84,.10), transparent 60%);
+}
+
+/* Utility */
+.center{text-align:center}
+.hidden{display:none !important}
+.muted{color:var(--muted)}
+.row{display:flex; align-items:center}
+.gap{gap:12px}
+
+/* ================================
+   Layout
+   ================================ */
+.app{
+  display:grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height:100vh;
+}
+
+/* Sidebar */
+.sidebar{
+  position:sticky; top:0; height:100dvh;
+  background:linear-gradient(180deg,var(--sidebar),var(--sidebar-700));
+  color:#ecf4f2; padding:28px 22px;
+  display:flex; flex-direction:column; gap:22px;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+
+.brand{
+  display:flex; align-items:center; gap:12px;
+  padding:8px 4px 18px 4px; border-bottom:1px solid rgba(255,255,255,.08);
+}
+.brand-logo{width:60px; height:60px; object-fit:contain; filter:drop-shadow(0 1px 0 rgba(0,0,0,.15))}
+.brand-name{font-weight:600; font-size:1.25rem; letter-spacing:.3px}
+
+.nav{display:flex; flex-direction:column; gap:8px; margin-top:8px}
+.nav-item{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 30px; border-radius:14px; text-decoration:none;
+  color:#e4f0ee; font-weight:500; transition:all .18s ease;
+}
+.nav-item:hover{background:rgba(255,255,255,.08)}
+.nav-item.active{background:rgba(255,255,255,.16); box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.nav-ico{width:22px}
+
+/* Main content */
+.content{
+  padding:32px 28px 80px;
+  display:flex; flex-direction:column; align-items:center; gap:42px;
+}
+.section{width:100%; display:flex; flex-direction:column; align-items:center; gap:26px}
+
+/* ================================
+   Card & Hero
+   ================================ */
+.card{
+  width:100%; max-width:var(--content-max);
+  background:var(--panel);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  border-radius:var(--r-lg);
+  padding:26px;
+}
+
+.card-title{
+  margin:0 0 12px; font-size:1.35rem; font-weight:600;
+  color:#1f2b2a;
+  position:relative;
+}
+.card-title.center{text-align:center}
+
+/* Match classification font and alignment to project section */
+#classification {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  color: var(--ink);
+}
+
+#classification .card-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+
+#classification .lead,
+#classification p,
+#classification h2,
+#classification h3,
+#classification h4 {
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Center and equalize action buttons for upload + webcam sections */
+#classification .uploader .row,
+#classification #panel-webcam .row {
+  display: flex;
+  justify-content: center;      /* Center buttons */
+  gap: 18px;                    /* Even spacing */
+  margin-top: 20px;             /* Add breathing room above */
+}
+
+/* Make all buttons same size and consistent */
+#classification .btn,
+#classification #panel-webcam .btn {
+  min-width: 160px;             /* Equal button width */
+  height: 46px;                 /* Equal height */
+  border-radius: 14px;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Prevent webcam buttons from sticking too close to preview box */
+#classification #panel-webcam {
+  margin-top: 20px;             /* Adds space below tabs */
+}
+
+#classification #panel-webcam .preview {
+  margin-bottom: 20px;          /* Keeps buttons further away from preview */
+}
+
+/* Optional – make disabled buttons uniform and subtle */
+#classification .btn:disabled {
+  opacity: 0.6;
+  background: #f4f6f5;
+  color: #9aa7a6;
+  box-shadow: none;
+}
+
+
+/* Center text inside the project section */
+.hero-body {
+  text-align: center;
+  max-width: 900px;     /* keeps it readable */
+  margin: 0 auto;       /* horizontally center block */
+}
+
+.hero-body .title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.hero-body .lead {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--muted);
+  text-align: center;
+}
+
+.hero{padding:0}
+.hero-inner{
+  padding:60px 40px;
+  border-radius:var(--r-lg);
+  background:linear-gradient(180deg, #f7fbfa 0%, #ffffff 100%);
+  position:relative; overflow:hidden;
+}
+.hero-badge{
+  position:absolute; right:24px; top:24px; width:56px; height:56px; opacity:.12; pointer-events:none;
+}
+.title{margin:0 0 10px; font-size:1.6rem; font-weight:600}
+.lead{margin:0; color:var(--muted); line-height:1.6}
+
+/* Team */
+.team-grid{
+  list-style:none; padding:0; margin:8px 0 0;
+  display:grid; grid-template-columns:repeat(3, minmax(140px,1fr)); gap:16px; justify-items:center;
+}
+.member{display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px 12px; background:#f6faf9; border:1px solid var(--line); border-radius:18px; width:100%}
+.avatar{width:54px; height:54px; display:grid; place-items:center; font-size:28px; border-radius:999px; background:#fff; border:1px solid var(--line); box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.name{font-weight:600}
+
+/* Bit Byte Theory label */
+.team-label {
+  width: fit-content;
+  margin: 0 auto 12px auto;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 36px;
+  border-radius: 999px;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  box-shadow: 0 6px 18px rgba(211, 163, 31, 0.3);
+}
+
+
+/* ================================
+   Tabs & Panels
+   ================================ */
+/* Uniform tab buttons (Upload / Webcam) */
+.tabs {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto 20px;
+  background: #f3f8f7;
+  border: 1px solid var(--line);
+  padding: 6px;
+  border-radius: 999px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  border: none;
+  background: transparent;
+  color: #48615c;
+  cursor: pointer;
+  padding: 14px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 999px;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  background: #e9f3f1;
+}
+
+.tab.active {
+  background: #ffffff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+
+.panel{margin-top:8px}
+
+/* ================================
+   Uploader / Preview
+   ================================ */
+.uploader{display:flex; flex-direction:column; gap:12px}
+.preview{
+  width:100%; height:320px; background:#f7fbfa;
+  border:2px dashed #d7e5e2; border-radius:20px;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden; position:relative;
+}
+.preview img{max-width:100%; max-height:100%; display:block}
+.preview .muted{font-weight:500}
+
+.hint{margin:4px 0 10px}
+
+.thumb{
+  width:76px; height:76px; object-fit:cover; border-radius:14px;
+  border:1px solid var(--line); background:#fff;
+}
+
+/* ================================
+   Buttons
+   ================================ */
+.btn{
+  -webkit-appearance:none; appearance:none;
+  border:1px solid var(--line); background:#fff; color:#1f2b2a;
+  padding:10px 16px; border-radius:14px; font-weight:600; cursor:pointer;
+  transition:all .18s ease; box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.btn:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.08)}
+.btn:disabled{opacity:.55; cursor:not-allowed; transform:none; box-shadow:none}
+
+.btn.primary{
+  background:var(--primary); color:#fff; border-color:transparent;
+}
+.btn.primary:hover{background:var(--primary-600)}
+
+.btn.warn{
+  background:var(--accent); color:#212016; border-color:rgba(0,0,0,.06);
+}
+.btn.warn:hover{filter:brightness(.98)}
+
+.btn.ghost{
+  background:#eef6f4; color:#24413b; border-color:transparent;
+}
+
+/* ================================
+   Results
+   ================================ */
+.result{
+  margin-top:14px; padding:16px 16px;
+  border:1px solid var(--line); border-radius:18px; background:#fcfefd;
+}
+.result-row{display:flex; align-items:center; gap:14px}
+.result-title{margin:0 0 4px; font-weight:600}
+
+.other-results{margin-top:12px}
+.other-results h4{margin:.25rem 0 .5rem; color:#2b3a38}
+.other-item{
+  display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px dashed #e9f0ef; font-weight:500;
+}
+.other-item:last-child{border-bottom:0}
+
+/* ================================
+   Detector Placeholder
+   ================================ */
+.detector-placeholder{
+  min-height:260px; display:grid; place-items:center;
+  border:2px dashed #d7e5e2; border-radius:18px; background:#f7fbfa;
+}
+
+
+
+/* ================================
+   Media Queries
+   ================================ */
+@media (max-width:1100px){
+  :root{ --sidebar-w: 230px }
+}
+@media (max-width:920px){
+  .app{grid-template-columns: 1fr}
+  .sidebar{
+    position:relative; height:auto; border-right:0; border-bottom:1px solid rgba(255,255,255,.1);
+    border-radius:0 0 var(--r-lg) var(--r-lg);
+  }
+  .content{padding:20px 16px 64px}
+  .team-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:620px){
+  .tabs{max-width:100%}
+  .preview{height:260px}
+  .team-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:420px){
+  .team-grid{grid-template-columns:1fr}
+  .thumb{width:68px; height:68px}
+}
+
+
+/* ================================
+  DETECTION SECTION STYLES
+   ================================ */
+
+#detection .card-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+
+#detection .lead,
+#detection p,
+#detection h2,
+#detection h3,
+#detection h4 {
+  color: var(--muted);
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Match Capture & Predict button color with Classify Image */
+#capture-btn {
+  background: var(--primary);   /* same green as Classify Image */
+  color: #fff;
+  border-color: transparent;
+}
+
+#capture-btn:hover {
+  background: var(--primary-600); /* slightly darker hover */
+}
+
+/* ===== Detection stream layout ===== */
+#detection .detector .preview {
+  margin-bottom: 20px;
+  /* reuse .preview box: keeps consistent size & dashed border */
+}
+
+#detection .detector .row {
+  justify-content: center; /* center Start/Stop buttons */
+  gap: 18px;
+}
+
+/* Equal button sizes for Detection (match Classification) */
+#detection .btn {
+  min-width: 160px;
+  height: 46px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Make sure the MJPEG stream fits the preview box nicely */
+#detector-stream {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+

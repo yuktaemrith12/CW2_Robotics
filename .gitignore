@@ -1,0 +1,5 @@
+# Ignore dataset folders for both modules
+Classification/dataset/
+Detection/dataset/
+Detection/synthetic_data_aug/
+Detection/My Yolo Detection DB.zip/
