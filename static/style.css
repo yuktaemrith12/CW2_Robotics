@@ -6,11 +6,11 @@
   --ink:#1c2230;
   --bg:#e9f1ef;                 /* light minty background */
   --panel:#ffffff;
-  --sidebar:#3e5a54;            /* deep green/teal from mockup */
-  --sidebar-700:#324a45;
-  --accent:#317e6e;            
-  --primary:#317e6e;
-  --primary-600:#2a6c5f;
+  --sidebar:#583e5a;            /* deep green/teal from mockup */
+  --sidebar-700:#4a3249;
+  --accent:#62317e;            
+  --primary:#6e4888;
+  --primary-600:#6d4281;
 
   /* Neutrals */
   --muted:#7b8a8a;

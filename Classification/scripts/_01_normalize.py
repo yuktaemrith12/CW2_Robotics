@@ -1,11 +1,11 @@
-# ==========================================================
-# ============ NORMALISE IMAGE DATASET SCRIPT ==============
-# ==========================================================
-# This script prepares image data for training deep learning
-# models by resizing and converting images into a consistent
-# format and quality. It creates a clean, uniform dataset
+# ===============================================================
+# ============ NORMALISE IMAGE DATASET SCRIPT ===================
+# ===============================================================
+# This script prepares image data for training deep learning     
+# models by resizing and converting images into a consistent    
+# format and quality. It creates a clean, uniform dataset        
 # under the 'Processed_Dataset' folder for classification tasks.
-# ==========================================================
+# ===============================================================
 
 # ---------- Imports ----------
 import os                        
