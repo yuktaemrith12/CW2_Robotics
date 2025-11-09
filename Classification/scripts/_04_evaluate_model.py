@@ -23,7 +23,7 @@ import seaborn as sns
 # ==========================================================
 # =================== CONFIGURATION ========================
 # ==========================================================
-MODEL_PATH = 'office_item_classifier_yolov8cls.pt'       # <-- your new model
+MODEL_PATH = 'grocery_yolov8cls.pt'       # <-- your new model
 TEST_DIR   = 'Classification/dataset/Final_Dataset/test' # folder-per-class
 DEVICE     = 0 if torch.cuda.is_available() else 'cpu'   # GPU if available
 
