@@ -33,13 +33,13 @@
       </svg>
         <span>CLASSIFICATION</span>
       </a>
-      <!--  <a class="nav-item" href="#detection">
+      <a class="nav-item" href="#detection">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-bounding-box" viewBox="0 0 16 16">
           <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5M.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5"/>
           <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm8-9a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
         </svg>
         <span>DETECTION</span>
-      </a> -->
+      </a>
     </nav>
   </aside>
 
@@ -53,13 +53,13 @@
         <div class="hero-inner">
           <img class="hero-badge" src="{{ url_for('static', filename='hero-badge.png') }}" alt="">
           <div class="hero-body">
-            <h1 class="title">SortiFy — Your Intelligent Grocery Assistant</h1>
+            <h1 class="title">SortiFy — Your Intelligent Desk Assistant</h1>
             <p class="lead">
-            This project showcases an AI-powered robotic assistant designed to support elderly individuals in organizing their groceries safely and effortlessly. 
-            The system uses the Yahboom DOFBOT Pi robotic arm integrated with a camera and a deep learning classification model to identify different types of groceries—such as bottles, cans, boxes, packets, fruits, and cleaning products.
-            After the elderly person places each grocery item on a designated scanning spot, the camera captures the image, and the trained model instantly classifies the item into one of six grocery categories. 
-            Using inverse kinematics and precise motion control, the robotic arm then picks up the item and places it into its corresponding container, reducing physical strain and minimizing sorting errors. 
-          </p>
+              This project showcases an AI-powered robotic system designed to automatically find, classify, and organize office desk items using computer vision and deep learning.
+              The software integrates object classification and detection models, using YOLOv8, trained on a custom dataset of common office items.
+              The system operates through a camera–robot integration workflow: the RGB-D camera captures the desk scene, the trained model identifies each item, and the robotic arm plans and executes a grasp to move it to its designated location.
+              Users can view real-time predictions through the interface, showing bounding boxes, detected object names, and confidence levels. 
+            </p>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@
 
     <section id="classification" class="section">
       <div class="card">
-        <h2 class="card-title center">Grocery Item Classifier</h2>
+        <h2 class="card-title center">Office Item Classifier</h2>
 
         <!-- Tabs -->
         <div class="tabs" role="tablist" aria-label="Input mode">
@@ -153,6 +153,27 @@
           </div>
 
           <div id="webcam-result" class="result hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== DETECTION ================================== -->
+
+    <section id="detection" class="section">
+      <div class="card">
+        <h2 class="card-title center">Office Item Detector</h2>
+        <p class="hint center">Click “Start Webcam” to view live detection. Click “Stop Webcam” to pause the stream.</p>
+
+        <div class="detector">
+          <div class="preview" id="detector-preview">
+            <img id="detector-stream" class="hidden" alt="Live detection stream">
+            <span id="detector-placeholder" class="muted">Detection Stream</span>
+          </div>
+
+          <div class="row center gap">
+            <button class="btn primary" id="detector-start" onclick="startDetection()">Start Webcam</button>
+            <button class="btn" id="detector-stop" onclick="stopDetection()" disabled>Stop Webcam</button>
+          </div>
         </div>
       </div>
     </section>
