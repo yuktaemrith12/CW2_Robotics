@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SortiFy — Office Robot</title>
+  <title>SortiFy — Grocery Robot</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -53,12 +53,12 @@
         <div class="hero-inner">
           <img class="hero-badge" src="{{ url_for('static', filename='hero-badge.png') }}" alt="">
           <div class="hero-body">
-            <h1 class="title">SortiFy — Your Intelligent Desk Assistant</h1>
+            <h1 class="title">SortiFy — Your Intelligent Grocery Assistant</h1>
             <p class="lead">
-              This project showcases an AI-powered robotic system designed to automatically find, classify, and organize office desk items using computer vision and deep learning.
-              The software integrates object classification and detection models, using YOLOv8, trained on a custom dataset of common office items.
-              The system operates through a camera–robot integration workflow: the RGB-D camera captures the desk scene, the trained model identifies each item, and the robotic arm plans and executes a grasp to move it to its designated location.
-              Users can view real-time predictions through the interface, showing bounding boxes, detected object names, and confidence levels. 
+              SortiFy is a vision-based robotic system designed to automatically identify and sort grocery items into their correct containers. The robot uses a camera and an AI model to recognize items such as bottles, cans, detergents, pulses, seafood, and fruits, then uses a robotic arm to pick and place them in their respective bins.
+              The main purpose of this project is to reduce manual effort in sorting groceries by creating an automated and intelligent system. It demonstrates how computer vision and robotics can work together to perform everyday tasks more efficiently.
+              The camera captures each grocery placed in a specific pick zone. The trained YOLOv8 detection model identifies the type of item, and based on the result, the robot moves its arm to place the grocery in the correct color-coded container.
+              This system not only shows the practical use of AI in automating daily activities but also helps improve accuracy, speed, and safety when handling different grocery items.
             </p>
           </div>
         </div>
