@@ -2,7 +2,7 @@ import os
 import cv2 # Make sure to 'pip install opencv-python'
 
 # --- Configuration ---
-base_dir = 'Detection/dataset/_01_segmented_dataset/fruit'
+base_dir = 'Detection/dataset/_01_segmented_dataset/seafood'
 
 # Set the names of your subdirectories
 images_dir_name = 'images'
@@ -12,7 +12,7 @@ labels_dir_name = 'labels'
 output_dir_name = 'visualized_output' 
 
 # Since your script remapped everything to '0', you only need one item.
-CLASS_NAMES = ['fruit'] 
+CLASS_NAMES = ['seafood'] 
 
 # --- Drawing Configuration ---
 BOX_COLOR = (0, 255, 0)  # Green (in BGR format for OpenCV)

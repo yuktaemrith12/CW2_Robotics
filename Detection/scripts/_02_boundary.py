@@ -1,10 +1,10 @@
 import os
 
 # --- Configuration ---
-labels_dir = 'Detection/dataset/_01_segmented_dataset/fruit/labels'  
+labels_dir = 'Detection/dataset/_01_segmented_dataset/seafood/labels'  
 
 # The single class ID you want for the final merged box
-FINAL_CLASS_ID = '5' 
+FINAL_CLASS_ID = '4' 
 # ---------------------
 
 def merge_annotations_to_single_box(directory, final_class_id):

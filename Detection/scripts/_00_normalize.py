@@ -13,8 +13,8 @@ from PIL import Image
 from tqdm import tqdm              
 
 # ---------- Define Input, Output and Resize Parameters ----------
-INPUT_DIR = 'Detection/dataset/_01_segmented_dataset/fruit/raw_images'       
-OUTPUT_DIR = 'Detection/dataset/_01_segmented_dataset/fruit/images' 
+INPUT_DIR = 'Detection/dataset/_01_segmented_dataset/seafood/raw_images'       
+OUTPUT_DIR = 'Detection/dataset/_01_segmented_dataset/seafood/images' 
 SIZE = (224, 224)                                  
 
 # ==========================================================

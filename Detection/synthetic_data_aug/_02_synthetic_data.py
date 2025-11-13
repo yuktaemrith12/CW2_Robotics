@@ -25,19 +25,19 @@ from tqdm import tqdm
 
 # --- Input Folders ---
 # Folder of object PNGs with transparency (alpha channel)
-OBJECT_DIR = 'Detection/synthetic_data_aug/fruit/fruit_cutout'
+OBJECT_DIR = 'Detection/synthetic_data_aug/seafood/seafood_cutout'
 # Folder of room backgrounds (JPEG/PNG)
 BACKGROUND_DIR = 'Detection/synthetic_data_aug/house_room_background/images'
 
 # --- Output Folders (created if missing) ---
-OUTPUT_IMAGE_DIR = 'Detection/synthetic_data_aug/fruit/fruit_synthetic/images'
-OUTPUT_LABEL_DIR = 'Detection/synthetic_data_aug/fruit/fruit_synthetic/labels'
-OUTPUT_VISUALIZE_DIR = 'Detection/synthetic_data_aug/fruit/fruit_synthetic/visualize'
+OUTPUT_IMAGE_DIR = 'Detection/synthetic_data_aug/seafood/seafood_synthetic/images'
+OUTPUT_LABEL_DIR = 'Detection/synthetic_data_aug/seafood/seafood_synthetic/labels'
+OUTPUT_VISUALIZE_DIR = 'Detection/synthetic_data_aug/seafood/seafood_synthetic/visualize'
 
 # --- Generation Settings ---
-NUM_IMAGES_TO_GENERATE = 600          # Total synthetic images to produce
-CLASS_ID = 5                            # Numeric class id for YOLO labels
-CLASS_NAME = 'fruit'                # Human-readable name (for visualization only)
+NUM_IMAGES_TO_GENERATE = 1000          # Total synthetic images to produce
+CLASS_ID = 4                           # Numeric class id for YOLO labels
+CLASS_NAME = 'seafood'                # Human-readable name (for visualization only)
 MIN_OBJECTS_PER_IMAGE = 1               # Range of objects pasted per background
 MAX_OBJECTS_PER_IMAGE = 3
 
@@ -197,7 +197,7 @@ def main():
 
         # 4) SAVE ALL OUTPUTS
         synthetic_img_rgb = synthetic_img.convert('RGB')  # Drop alpha for JPEG
-        base_filename = f"synthetic_fruit_{i:05d}"
+        base_filename = f"synthetic_seafood_{i:05d}"
 
         # -- Save image (.jpg) --
         img_path = os.path.join(OUTPUT_IMAGE_DIR, base_filename + ".jpg")

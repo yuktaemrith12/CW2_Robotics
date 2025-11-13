@@ -2,13 +2,13 @@ import os
 
 # --- Configuration ---
 # Set the path to the directory containing your images
-images_dir = 'Detection/dataset/_01_segmented_dataset/fruit/images'  
+images_dir = 'Detection/dataset/_01_segmented_dataset/seafood/images'  
 
 # Set the path to the directory containing your YOLO .txt label files
-labels_dir = 'Detection/dataset/_01_segmented_dataset/fruit/labels'   
+labels_dir = 'Detection/dataset/_01_segmented_dataset/seafood/labels'   
 
 # The new class ID you want for ALL objects (0 for a single class)
-NEW_CLASS_ID = '5' 
+NEW_CLASS_ID = '4' 
 
 # The image extensions to look for when deleting
 IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png']
