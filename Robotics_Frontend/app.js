@@ -1,22 +1,39 @@
 // ==================== CONFIG ====================
 const BASE_URL = "http://127.0.0.1:8000";
 
+
+// ==================== CUSTOM SCROLL WITH OFFSET ====================
+function scrollToSection(id, offset = -150) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  const y = el.getBoundingClientRect().top + window.pageYOffset + offset;
+
+  window.scrollTo({
+    top: y,
+    behavior: "smooth",
+  });
+}
+
+
 // ==================== LANDING PAGE ====================
 const landingPage = document.getElementById("landing-page");
 const landingStartBtn = document.getElementById("landing-start-btn");
 
-landingStartBtn.addEventListener("click", () => {
-  landingPage.classList.add("fade-out");
-  setTimeout(() => {
-    landingPage.style.display = "none";
-    // Scroll gently to the project intro
-    const project = document.getElementById("project");
-    if (project) project.scrollIntoView({ behavior: "smooth" });
-  }, 550);
-});
+if (landingPage && landingStartBtn) {
+  landingStartBtn.addEventListener("click", () => {
+    landingPage.classList.add("fade-out");
+    setTimeout(() => {
+      landingPage.style.display = "none";
+      // Scroll gently to the robot app (first section) with custom offset
+      scrollToSection("robot-app", -150);
+    }, 550);
+  });
+}
+
 
 // ==================== NAV ACTIVE ON SCROLL ====================
-const sections = ["project", "robot-app"];
+const sections = ["robot-app", "project"];
 const navLinks = document.querySelectorAll(".nav-item");
 
 window.addEventListener("scroll", () => {
@@ -35,6 +52,7 @@ window.addEventListener("scroll", () => {
   });
 });
 
+
 // ==================== DETECTION UI ====================
 let detectionActive = false;
 let statusInterval = null;
@@ -51,6 +69,7 @@ const robotStatus = document.getElementById("robot-status");
 const currentItemName = document.getElementById("current-item-name");
 const currentItemConfidence = document.getElementById("current-item-confidence");
 const helperMessage = document.getElementById("helper-message");
+
 
 // ---- Start detection ----
 async function startDetection() {
@@ -99,6 +118,7 @@ async function startDetection() {
   startStatusPolling();
 }
 
+
 // ---- Stop detection ----
 async function stopDetection() {
   try {
@@ -130,6 +150,7 @@ async function stopDetection() {
 
 startBtn.addEventListener("click", startDetection);
 stopBtn.addEventListener("click", stopDetection);
+
 
 // ==================== STATUS POLLING ====================
 function startStatusPolling() {
@@ -185,12 +206,14 @@ function stopStatusPolling() {
   }
 }
 
+
 // Safety: stop robot when leaving page
 window.addEventListener("beforeunload", () => {
   if (detectionActive) {
     stopDetection();
   }
 });
+
 
 // Quick backend health check on load
 window.addEventListener("load", async () => {
