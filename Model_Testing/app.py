@@ -31,7 +31,7 @@ app = Flask(__name__)
 
 
 # --- Path to your YOLOv8 classification checkpoint ---
-YOLO_CLS_WEIGHTS = 'grocery_yolov8cls.pt'
+YOLO_CLS_WEIGHTS = 'models/classification.pt'
 
 def load_classifier():
     """
@@ -160,7 +160,7 @@ def predict():
 
 # Load your custom-trained YOLO detection model
 
-det_model = YOLO('best.pt')
+det_model = YOLO('models/best.pt')
 
 # Thread-safe buffers using deque
 raw_frames_buffer = deque(maxlen=1)

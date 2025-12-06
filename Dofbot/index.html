@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+  <title>Sortify – Grocery Sorting Robot</title>
+
+  <!-- Icons & Font -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <!-- Font: JOST -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Blue theme */
+      --bg: #e9f3ff;
+      --card-bg: #e6edfad2;
+      --primary: #3f69b0;
+      --primary-soft: #e0ebff;
+      --accent-green: #12c26d;
+      --accent-red: #ff6b6b;
+      --accent-orange: #ffb84d;
+
+      --text-main: #0f172a;
+      --text-muted: #4c4f55;
+
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --radius-pill: 999px;
+
+      --shadow-soft: 0 18px 40px rgba(3, 5, 10, 0.15);
+      --shadow-card: 0 14px 32px rgba(16, 19, 22, 0.35);
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: "Jost", sans-serif !important;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      background-color: var(--bg);
+      background-image: url("images/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 1400px;
+      background: transparent;
+    }
+
+    /* ================= HEADER BANNER ================= */
+
+    .hero-banner {
+      background: linear-gradient(135deg, #5380da, #2a3d52);
+      border-radius: 32px;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-soft);
+      color: #fcfdfd;
+      margin-bottom: 26px;
+    }
+
+    .hero-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .hero-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #396eb3, #273a79);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 24px rgba(15, 23, 42, 0.35);
+      /* font-size no longer needed for icon */
+    }
+
+    /*  logo image styling */
+    .hero-logo-img {
+      max-width: 50px;
+      max-height: 50px;
+      display: block;
+    }
+
+    .hero-text h1 {
+      margin: 0;
+      font-weight: 800;
+      font-size: 2.2rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-text p {
+      margin: 6px 0 0;
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .connection-pill {
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .connection-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    .connection-pill.connected .connection-dot {
+      background: #4ade80;
+      box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.45);
+    }
+
+    .connection-label {
+      font-weight: 600;
+    }
+
+    .connection-status {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    /* ================= HOW-TO SECTION ================= */
+
+    .howto-card {
+      margin-top: 18px;
+      background: var(--card-bg);
+      border-radius: 24px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .howto-main {
+      flex: 1;
+    }
+
+    .howto-main h2 {
+      margin: 0 0 8px;
+      font-size: 1.7rem;
+    }
+
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 1000px) {
+      .steps-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .steps-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step-card {
+      border-radius: 18px;
+      border: 1px solid #e2e8f0;
+      background: #eef1f6;
+      padding: 12px 14px;
+      box-shadow: 0 8px 16px rgba(148, 163, 184, 0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .step-number {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: #6292f4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ecf0ff;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .step-card:nth-child(2) .step-number {
+      background: #4867cd;
+    }
+    .step-card:nth-child(3) .step-number {
+      background: #2e46be;
+    }
+    .step-card:nth-child(4) .step-number {
+      background: #0f118f;
+    }
+
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .step-text {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* ================= MAIN GRID ================= */
+
+    .main-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 1000px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 26px;
+      padding: 18px 20px 20px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid #dde5f0;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .tag-live {
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #fee2e2;
+      color: #b91c1c;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+    }
+
+    .tag-live::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #ef4444;
+    }
+
+    /* Camera card */
+
+    .camera-frame {
+      border-radius: 22px;
+      overflow: hidden;
+      background: #020617;
+      position: relative;
+      aspect-ratio: 4 / 3;
+      margin-bottom: 18px;
+    }
+
+    .camera-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .camera-bottom-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 18px;
+      align-items: center;
+    }
+
+    @media (max-width: 700px) {
+      .camera-bottom-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .label {
+      font-size: 1rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .detected-pill {
+      border-radius: 999px;
+      background: linear-gradient(135deg, #5069b9, #8ba9fd);
+      color: #f9fafb;
+      padding: 10px 16px;
+      min-height: 40px;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      box-shadow: 0 10px 22px rgba(59, 130, 246, 0.55);
+    }
+
+    .confidence-wrapper {
+      width: 100%;
+    }
+
+    .confidence-bar-bg {
+      width: 100%;
+      height: 14px;
+      border-radius: 999px;
+      background: #edf2ff;
+      overflow: hidden;
+    }
+
+    .confidence-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22c55e, #4ade80);
+      transition: width 0.25s ease-out;
+    }
+
+    .confidence-value {
+      text-align: right;
+      font-size: 0.98rem;
+      margin-top: 4px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Sorting control card */
+
+    .instruction-banner {
+      border-radius: 18px;
+      padding: 12px 14px;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+    }
+
+    .instruction-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: #3b82f6;
+    }
+
+    .instruction-text {
+      font-weight: 600;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn-main {
+      border: none;
+      border-radius: 999px;
+      padding: 14px 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast),
+        opacity 0.12s linear;
+    }
+
+    .btn-main:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .btn-start {
+      background: linear-gradient(135deg, #1fb86a, #18a34a);
+      color: #ecfdf5;
+      box-shadow: 0 12px 24px rgba(34, 197, 94, 0.55);
+    }
+
+    .btn-start:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(34, 197, 94, 0.7);
+    }
+
+    .btn-stop {
+      background: #fecaca;
+      color: #b91c1c;
+      box-shadow: 0 10px 22px rgba(248, 113, 113, 0.5);
+    }
+
+    .btn-stop:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 26px rgba(248, 113, 113, 0.75);
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .status-card-small {
+      border-radius: 18px;
+      background: #f9fafb;
+      padding: 12px 14px;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .status-label-small {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .status-value {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-badge.idle {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status-badge.active {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .status-badge.stopped {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .categories-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .category-pill {
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1.5px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      background: #ffffff;
+    }
+
+    .category-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+    }
+
+    .cat-bottle {
+      border-color: #facc15;
+    }
+    .cat-bottle .category-dot {
+      background: #facc15;
+    }
+
+    .cat-can {
+      border-color: #fb7185;
+    }
+    .cat-can .category-dot {
+      background: #fb7185;
+    }
+
+    .cat-detergent {
+      border-color: #a855f7;
+    }
+    .cat-detergent .category-dot {
+      background: #a855f7;
+    }
+
+    .cat-fruit {
+      border-color: #22c55e;
+    }
+    .cat-fruit .category-dot {
+      background: #22c55e;
+    }
+
+    .cat-pulses {
+      border-color: #ec4899;
+    }
+    .cat-pulses .category-dot {
+      background: #ec4899;
+    }
+
+    .cat-seafood {
+      border-color: #0ea5e9;
+    }
+    .cat-seafood .category-dot {
+      background: #0ea5e9;
+    }
+
+    @media (max-width: 700px) {
+      .hero-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .hero-right {
+        align-self: stretch;
+        justify-content: flex-end;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- HERO BANNER -->
+    <section class="hero-banner">
+      <div class="hero-left">
+        <div class="hero-icon">
+          <img src="images/logo.png" alt="Sortify logo" class="hero-logo-img" />
+        </div>
+        <div class="hero-text">
+          <h1>Welcome to Sortify</h1>
+          <p>Your intelligent grocery sorting assistant for effortless organization.</p>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div id="connection-pill" class="connection-pill">
+          <div class="connection-dot"></div>
+          <div>
+            <div class="connection-label" id="connection-label">Disconnected</div>
+            <div class="connection-status" id="connection-status">Trying to reach robot…</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW TO USE -->
+    <section class="howto-card">
+      <div class="howto-main">
+        <h2>How to Use Sortify</h2>
+        <div class="steps-row">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-title">Press Start</div>
+            <div class="step-text">
+              Click the green <strong>Start</strong> button to activate the sorting system.
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-title">Place Object</div>
+            <div class="step-text">
+              When prompted, place one grocery item in front of the camera.
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-title">Wait for Sorting</div>
+            <div class="step-text">
+              Sortify will recognise the item and move it to the correct box.
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-title">Repeat or Stop</div>
+            <div class="step-text">
+              Continue with more items, or press <strong>Stop</strong> when finished.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN GRID -->
+    <section class="main-grid">
+      <!-- LEFT: LIVE CAMERA -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Live Camera Feed</div>
+          <div class="tag-live">LIVE</div>
+        </div>
+        <div class="camera-frame">
+          <img src="{{ url_for('video_feed') }}" alt="Live camera feed from Sortify" />
+        </div>
+
+        <div class="camera-bottom-row">
+          <div>
+            <div class="label">Detected Object:</div>
+            <div id="detected-pill" class="detected-pill">
+              <span id="detected-object-text">--</span>
+            </div>
+          </div>
+          <div class="confidence-wrapper">
+            <div class="label">Confidence:</div>
+            <div class="confidence-bar-bg">
+              <div id="confidence-fill" class="confidence-bar-fill"></div>
+            </div>
+            <div id="confidence-value" class="confidence-value">0%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: SORTING CONTROL -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Sorting Control</div>
+        </div>
+
+        <div class="instruction-banner">
+          <div class="instruction-dot"></div>
+          <div>
+            <div class="instruction-text" id="instruction-main">
+              Press <strong>START</strong> to begin sorting groceries.
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button
+            id="btn-start"
+            class="btn-main btn-start"
+            onclick="toggleSystem('start')"
+          >
+            START SORTING
+          </button>
+          <button
+            id="btn-stop"
+            class="btn-main btn-stop"
+            onclick="toggleSystem('stop')"
+            disabled
+          >
+            STOP SYSTEM
+          </button>
+        </div>
+
+        <div class="status-grid">
+          <div class="status-card-small">
+            <div class="status-label-small">System Status</div>
+            <div class="status-value">
+              <span
+                id="system-status-badge"
+                class="status-badge idle"
+              >
+                Idle
+              </span>
+            </div>
+          </div>
+          <div class="status-card-small">
+            <div class="status-label-small">Robot Action</div>
+            <div class="status-value" id="robot-action">
+              Waiting
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="categories-title">Grocery Categories</div>
+          <div class="categories-grid">
+            <div class="category-pill cat-bottle">
+              <div class="category-dot"></div>
+              Bottle
+            </div>
+            <div class="category-pill cat-can">
+              <div class="category-dot"></div>
+              Can
+            </div>
+            <div class="category-pill cat-detergent">
+              <div class="category-dot"></div>
+              Detergent
+            </div>
+            <div class="category-pill cat-fruit">
+              <div class="category-dot"></div>
+              Fruit
+            </div>
+            <div class="category-pill cat-pulses">
+              <div class="category-dot"></div>
+              Pulses
+            </div>
+            <div class="category-pill cat-seafood">
+              <div class="category-dot"></div>
+              Seafood
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let isRunning = false;
+    let lastStatusOk = false;
+
+    async function toggleSystem(action) {
+      const startBtn = document.getElementById("btn-start");
+      const stopBtn = document.getElementById("btn-stop");
+
+      startBtn.disabled = true;
+      stopBtn.disabled = true;
+
+      try {
+        const res = await fetch("/api/toggle", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action }),
+        });
+
+        if (!res.ok) throw new Error("Toggle request failed");
+
+        const data = await res.json();
+        console.log("Toggle:", data);
+        updateRunningState(action === "start");
+      } catch (err) {
+        console.error(err);
+        updateRunningState(isRunning); // revert to previous
+      }
+    }
+
+    function updateRunningState(active) {
+      isRunning = active;
+
+      const startBtn = document.getElementById("btn-start");
+      const stopBtn = document.getElementById("btn-stop");
+      const badge = document.getElementById("system-status-badge");
+      const actionText = document.getElementById("robot-action");
+      const instruction = document.getElementById("instruction-main");
+
+      startBtn.disabled = active;
+      stopBtn.disabled = !active;
+
+      badge.classList.remove("idle", "active", "stopped");
+
+      if (active) {
+        badge.classList.add("active");
+        badge.textContent = "Running";
+        actionText.textContent = "Looking for item…";
+        instruction.innerHTML = "Place one grocery item in front of the camera and wait.";
+      } else {
+        badge.classList.add("stopped");
+        badge.textContent = "Stopped";
+        actionText.textContent = "Waiting";
+        instruction.innerHTML = "Press <strong>START</strong> to begin sorting groceries.";
+      }
+    }
+
+    function updateConnectionUI(connected) {
+      const pill = document.getElementById("connection-pill");
+      const label = document.getElementById("connection-label");
+      const status = document.getElementById("connection-status");
+
+      if (connected) {
+        pill.classList.add("connected");
+        label.textContent = "Connected";
+        status.textContent = "Robot reachable.";
+      } else {
+        pill.classList.remove("connected");
+        label.textContent = "Disconnected";
+        status.textContent = "Trying to reach robot…";
+      }
+    }
+
+    function inferRobotAction(statusStr) {
+      const s = (statusStr || "").toLowerCase();
+      if (!s || s.includes("idle")) return "Waiting";
+      if (s.includes("picking")) return "Picking item";
+      if (s.includes("moving")) return "Moving to box";
+      if (s.includes("returning")) return "Returning home";
+      return statusStr || "Working";
+    }
+
+    function updateFromStatus(data) {
+      const badge = document.getElementById("system-status-badge");
+      const actionText = document.getElementById("robot-action");
+      const instruction = document.getElementById("instruction-main");
+      const detectedText = document.getElementById("detected-object-text");
+      const confFill = document.getElementById("confidence-fill");
+      const confValue = document.getElementById("confidence-value");
+
+      const status = data.status || "";
+      const detected = data.detected || "--";
+
+      // System badge
+      badge.classList.remove("idle", "active", "stopped");
+      if (data.active) {
+        badge.classList.add("active");
+        badge.textContent = "Running";
+      } else if (!data.active && status.toLowerCase().includes("idle")) {
+        badge.classList.add("idle");
+        badge.textContent = "Idle";
+      } else {
+        badge.classList.add("stopped");
+        badge.textContent = "Stopped";
+      }
+
+      // Robot action text
+      actionText.textContent = inferRobotAction(status);
+
+      // Instruction text (simple mapping)
+      if (!data.active) {
+        instruction.innerHTML =
+          'Press <strong>START</strong> to begin sorting groceries.';
+      } else if (status.toLowerCase().includes("wait") || status.toLowerCase().includes("idle")) {
+        instruction.textContent = "Place one grocery item in front of the camera.";
+      } else if (status.toLowerCase().includes("moving") || status.toLowerCase().includes("picking")) {
+        instruction.textContent = "Please wait. Do not touch the item.";
+      } else {
+        instruction.textContent = status || "Sorting in progress…";
+      }
+
+      // Detected object
+      detectedText.textContent = detected && detected !== "None" ? detected : "--";
+
+      // Confidence (if backend later sends it)
+      if (typeof data.confidence === "number" && !isNaN(data.confidence)) {
+        const pct = Math.round(data.confidence * 100);
+        const clamped = Math.max(0, Math.min(100, pct));
+        confFill.style.width = clamped + "%";
+        confValue.textContent = clamped + "%";
+      } else {
+        // default for now
+        confFill.style.width = "0%";
+        confValue.textContent = "0%";
+      }
+
+      // Keep buttons synced with real active flag
+      if (typeof data.active === "boolean" && data.active !== isRunning) {
+        updateRunningState(data.active);
+      }
+    }
+
+    async function pollStatus() {
+      try {
+        const res = await fetch("/api/status");
+        if (!res.ok) throw new Error("Status not OK");
+        const data = await res.json();
+
+        updateConnectionUI(true);
+        lastStatusOk = true;
+        updateFromStatus(data);
+      } catch (err) {
+        console.error("Status poll failed:", err);
+        updateConnectionUI(false);
+        lastStatusOk = false;
+      }
+    }
+
+    setInterval(pollStatus, 1000);
+    pollStatus();
+  </script>
+</body>
+</html>
