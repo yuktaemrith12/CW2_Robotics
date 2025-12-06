@@ -1,28 +1,44 @@
-# --- Core Python & Data Libraries ---
+##############################
+# Core Python Dependencies
+##############################
 numpy==1.26.4
 pandas==2.2.2
-tqdm==4.66.4
 Pillow==10.3.0
+tqdm==4.66.4
 
-# --- Deep Learning Framework ---
-torch==2.3.1
-torchvision==0.18.1
-torchaudio==2.3.1
+##############################
+# Machine Learning / YOLO
+##############################
+# Use latest stable Ultralytics (auto-installs compatible Torch)
+ultralytics==8.2.0
 
-# --- Model Evaluation & Visualization ---
-matplotlib==3.9.0
-seaborn==0.13.2
-scikit-learn==1.5.0
+# Torch for training on laptop (Pi will use its own build)
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
 
-# --- Web Framework (Flask App) ---
+##############################
+# Computer Vision
+##############################
+# Full pip opencv package works on laptop; Pi uses apt install
+opencv-python==4.9.0.80
+
+##############################
+# Web Backend (Flask)
+##############################
 Flask==3.0.3
 Werkzeug==3.0.3
 itsdangerous==2.2.0
 Jinja2==3.1.4
 
-# --- Computer Vision & Image Processing ---
-opencv-python==4.10.0.84
+##############################
+# Utilities
+##############################
+matplotlib==3.9.0
+seaborn==0.13.2
+scikit-learn==1.5.0
 
-# --- Utility & Deployment ---
-gunicorn==22.0.0  # Optional – for production hosting (e.g., Render, Heroku)
-
+##############################
+# Deployment (optional)
+##############################
+gunicorn==22.0.0
