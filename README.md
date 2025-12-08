@@ -1,6 +1,6 @@
 
 
-# **SortiFy – Grocery Sorting Robot **
+# SortiFy – Grocery Sorting Robot 
 
 SortiFy is a vision-based robotic system built for the **AI in Robotics (PDE3802)** module.
 The system combines:
